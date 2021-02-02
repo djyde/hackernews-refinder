@@ -53,3 +53,30 @@ export async function getToday(tag: string) {
 
   return await db.getItem<SearchResult["hits"]>("getToday");
 }
+
+
+export type Item = {
+  id: number,
+  created_at: string,
+  author: string,
+  title: string,
+  url: string,
+  points: number,
+  children: Array<Item>
+}
+export async function getItem(id: string) {
+  const res = await searchAPI.get<Item>(`items/${id}`);
+
+  return res.data
+}
+
+export async function searchByUrl(url: string) {
+  const res = await searchAPI.get<SearchResult>(`/search`, {
+    params: {
+      query: url,
+      restrictSearchableAttributes: 'url'
+    },
+  });
+
+  return res.data.hits
+}
