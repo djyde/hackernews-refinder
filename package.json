@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "snowpack dev"
+    "dev": "parcel watch core/content_script.ts -d extension/chrome --no-hmr"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

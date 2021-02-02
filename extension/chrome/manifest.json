@@ -1,0 +1,14 @@
+{
+  "name": "HackerNews Refinder",
+  "description": "HackerNews Refinder",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "js": ["content_script.js"]
+    }
+  ]
+}
