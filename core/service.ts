@@ -23,35 +23,31 @@ export type SearchResult = {
 };
 
 export async function getToday(tag: string) {
-  const cached = await db.getItem<SearchResult['hits']>('getToday')
+  // const cached = await db.getItem<SearchResult["hits"]>(["getToday", tag].join(','));
 
-  if (!cached) {
-    let results = [] as SearchResult["hits"];
+  let results = [] as SearchResult["hits"];
 
-    for await (let index of [1, 2, 3]) {
-      const lastYearOfTodayBegin = dayjs()
-        .subtract(index, "year")
-        .startOf("day");
-      const lastYearOfTodayEnd = dayjs().subtract(index, "year").endOf("day");
+  for await (let index of [1, 2, 3]) {
+    const lastYearOfTodayBegin = dayjs().subtract(index, "year").startOf("day");
+    const lastYearOfTodayEnd = dayjs().subtract(index, "year").endOf("day");
 
-      const res = await searchAPI.get<SearchResult>(`/search`, {
-        params: {
-          hitsPerPage: 3,
-          tags: [tag].join(","),
-          numericFilters: [
-            `created_at_i<${lastYearOfTodayEnd.unix()}`,
-            `created_at_i>${lastYearOfTodayBegin.unix()}`,
-          ].join(","),
-        },
-      });
+    const res = await searchAPI.get<SearchResult>(`/search`, {
+      params: {
+        hitsPerPage: 3,
+        tags: [tag].join(","),
+        numericFilters: [
+          `created_at_i<${lastYearOfTodayEnd.unix()}`,
+          `created_at_i>${lastYearOfTodayBegin.unix()}`,
+        ].join(","),
+      },
+    });
 
-      results = [...results, ...res.data.hits];
+    results = [...results, ...res.data.hits];
 
-      await db.setItem<SearchResult["hits"]>("getToday", results);
-    }
+    // await db.setItem<SearchResult["hits"]>("getToday", results);
   }
 
-  return await db.getItem<SearchResult["hits"]>("getToday");
+  return results;
 }
 
 

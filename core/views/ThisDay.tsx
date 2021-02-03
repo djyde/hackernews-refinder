@@ -5,10 +5,12 @@ import { useQuery } from 'react-query'
 import Group from '../components/Group'
 import { getToday } from '../service'
 
-function ThisDay() {
+function ThisDay(props: {
+  tag: string
+}) {
 
-  const getTodayQuery = useQuery(['getToday', 'story'], async () => {
-    const res = await getToday('story')
+  const getTodayQuery = useQuery(['getToday', props.tag], async () => {
+    const res = await getToday(props.tag)
     return res
   })
 
@@ -21,7 +23,7 @@ function ThisDay() {
 
   return (
     <>
-      <Group title="This Day" hits={getTodayQuery.data} />
+      <Group isLoading={getTodayQuery.isLoading} title="On This Day" hits={getTodayQuery.data} />
     </>
   )
 }

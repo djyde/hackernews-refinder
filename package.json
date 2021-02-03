@@ -1,15 +1,17 @@
 {
   "scripts": {
-    "dev": "parcel watch core/content_script.ts -d extension/chrome --no-hmr"
+    "dev": "parcel index.html",
+    "start": "parcel watch core/content_script.ts -d extension/chrome --no-hmr",
+    "build": "parcel build core/content_script.ts -d extension/chrome --no-source-maps"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "snowpack": "^3.0.11",
-    "ts-node": "^9.1.1",
+    "parcel-bundler": "^1.12.4",
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.4",
     "@chakra-ui/react": "^1.2.1",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
@@ -18,9 +20,9 @@
     "framer-motion": "^3.2.2-rc.1",
     "isomorphic-unfetch": "^3.1.0",
     "localforage": "^1.9.0",
+    "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-query": "^3.6.0",
-    "unfetch": "^4.2.0"
+    "react-query": "^3.6.0"
   }
 }

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Link } from '@chakra-ui/react'
+import { Box, Flex, Text, Link, Spinner, Center } from '@chakra-ui/react'
 import * as React from 'react'
 import { SearchResult } from '../service'
 import dayjs from 'dayjs'
@@ -6,12 +6,20 @@ import dayjs from 'dayjs'
 function Group (props: {
   title: string,
   hits?: SearchResult['hits']
+  isLoading: boolean,
 }) {
   return (
     <>
       <Box fontSize="sm">
-        <Flex fontWeight="bold" px={4} py={2} fontSize="sm" bgColor="orange.300">On this day</Flex>
+        <Flex fontWeight="bold" px={4} py={2} fontSize="sm" bgColor="orange.300">{props.title}</Flex>
         <Flex flexDirection="column">
+          {props.isLoading && <Center bgColor="white" py={4}><Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="orange.200"
+            color="orange.500"
+            size="md"
+          /></Center>}
           {props.hits?.map(hit => {
             return (
               <Box key={hit.objectID} bgColor="white" px={4} py={2}>

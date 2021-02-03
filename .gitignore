@@ -163,3 +163,5 @@ dist
 
 *.map
 content_script.js
+package-lock.json
+yarn.lock

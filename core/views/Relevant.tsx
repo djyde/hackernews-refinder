@@ -25,7 +25,7 @@ function Relevant(props: {
 
   return (
     <>
-      <Group title="Relevant" hits={getRelevantByUrl.data} />
+      <Group isLoading={getRelevantByUrl.isLoading} title="Relevant" hits={getRelevantByUrl.data} />
     </>
   )
 }
