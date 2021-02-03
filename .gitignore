@@ -165,3 +165,4 @@ dist
 content_script.js
 package-lock.json
 yarn.lock
+*.crx
